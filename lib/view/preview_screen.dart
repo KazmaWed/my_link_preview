@@ -17,26 +17,28 @@ class _PreviewScreenState extends State<PreviewScreen> {
       final viewModel = ref.watch(previewScreenViewModelProvider);
 
       final previewWidgetList = [
-        DummyPreviewCard(url: viewModel.url),
-        DummyPreviewCard(url: viewModel.url),
-        DummyPreviewCard(url: viewModel.url),
-        DummyPreviewCard(url: viewModel.url),
+        LinkPreviewCard(url: viewModel.url),
+        LinkPreviewCard(url: viewModel.url, type: LinkPreviewType.largeImage),
+        LinkPreviewCard(url: viewModel.url, type: LinkPreviewType.fullText),
+        LinkPreviewCard(url: viewModel.url, type: LinkPreviewType.noImage),
       ];
 
       return Scaffold(
         appBar: AppBar(
           title: const Text('LinkPreviewApp'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              ExpandedListView(widgetList: previewWidgetList),
-              const SizedBox(height: 8),
-              const TextFieldRow(),
-              const SizedBox(height: 12),
-              PreviewButton(callback: () => setState(() {})),
-            ],
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                ExpandedListView(widgetList: previewWidgetList),
+                const SizedBox(height: 8),
+                const TextFieldRow(),
+                const SizedBox(height: 12),
+                PreviewButton(callback: () => setState(() {})),
+              ],
+            ),
           ),
         ),
       );
